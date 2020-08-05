@@ -36,15 +36,6 @@ export class AppComponent implements OnInit {
 
     });
 
-
-    // Se llama a la consulta de meData
-    this.api.getMe('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmMjRkNzAzY2E5MzNmNDlhMDM0MTZiNiIsIm5hbWUiOiJNb21mdXMiLCJsYXN0bmFtZSI6IkFyYm9sZW8iLCJlbWFpbCI6Im1vbWZ1c0BvdXRsb29rLmNvbSIsImlkIjoxLCJyZWdpc3RlckRhdGUiOiIyMDIwLTA3LTMxIDIzOjQ0OjE5In0sImlhdCI6MTU5NjU5OTI2MywiZXhwIjoxNTk2Njg1NjYzfQ.GfUOGu6W_SUXTjWuvFgVbp4ZV8Ng-o4exPPY1ZTUfKo').subscribe( (result) => {
-
-      // Obtener suscripto los datos de consulta
-      console.log(result);
-
-    } );
-
   }
 
 }

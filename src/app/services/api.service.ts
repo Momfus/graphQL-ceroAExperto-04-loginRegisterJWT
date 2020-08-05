@@ -52,7 +52,7 @@ export class ApiService {
   }
 
   // Nuestra info con el token
-  getMe( token: string ): Observable<any> {
+  getMe(): Observable<any> {
 
     return this.apollo // Ejemplo particular (luego se hará parametrizada)
     .watchQuery(
@@ -62,7 +62,7 @@ export class ApiService {
         context: {
 
           headers: new HttpHeaders({
-            authorization: token
+            authorization: localStorage.getItem('tokenJWT')
           })
 
         }

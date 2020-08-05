@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { LoginData, LoginResult } from './login.interface';
 import { ApiService } from '../../services/api.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   error: boolean;
 
-  constructor( private api: ApiService ) { }
+  constructor( private api: ApiService, private router: Router ) { }
 
   ngOnInit(): void {
   }
@@ -29,20 +30,16 @@ export class LoginComponent implements OnInit {
     this.api.login( this.user.email, this.user.password )
         .subscribe( (result: LoginResult) => {
 
-          console.log(result);
-
           if ( result.status ) {
 
             this.error = false;
             localStorage.setItem('tokenJWT', result.token);
-            console.log('Login correcto');
+            this.router.navigate(['/me']);
 
           } else {
 
             this.error = true;
             localStorage.removeItem('tokenJWT');
-            console.log('Login incorrecto');
-
           }
 
         } );

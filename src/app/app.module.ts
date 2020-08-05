@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 
 import { GraphqlModule } from './graphql/graphql.module';
 import { LoginComponent } from './components/login/login.component';
+import { MeComponent } from './components/me/me.component';
 
 
 
@@ -15,7 +16,8 @@ import { LoginComponent } from './components/login/login.component';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    MeComponent
   ],
   imports: [
     BrowserModule,
