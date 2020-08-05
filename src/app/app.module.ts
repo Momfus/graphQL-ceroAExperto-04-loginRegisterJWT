@@ -10,6 +10,7 @@ import { GraphqlModule } from './graphql/graphql.module';
 import { LoginComponent } from './components/login/login.component';
 import { MeComponent } from './components/me/me.component';
 import { UsersComponent } from './components/users/users.component';
+import { NavbarComponent } from './components/shared/navbar/navbar.component';
 
 
 
@@ -19,7 +20,8 @@ import { UsersComponent } from './components/users/users.component';
     AppComponent,
     LoginComponent,
     MeComponent,
-    UsersComponent
+    UsersComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
