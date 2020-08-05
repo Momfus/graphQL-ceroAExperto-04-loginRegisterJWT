@@ -18,30 +18,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Para saber el estado de la sesión y controlar el estado del menu
-    if ( localStorage.getItem('tokenJWT') !== null ) {
-
-      // Se llama a la consulta de meData
-      this.auth.getMe().subscribe( (result: MeData) => {
-
-        // Obtener suscripto los datos de consulta
-        if ( result.status ) { // De tener un token no caducado y válido
-
-          this.auth.updateStateSession( true );
-
-        } else {
-
-          this.auth.updateStateSession( false );
-
-        }
-
-      });
-
-    } else { // De no haber token
-
-      this.auth.updateStateSession( false );
-
-    }
+    this.auth.start();
 
     // Se llama a la consulta en apollo para traer lo necesario.
     this.api.getUsers().subscribe( (result: User[]) => {

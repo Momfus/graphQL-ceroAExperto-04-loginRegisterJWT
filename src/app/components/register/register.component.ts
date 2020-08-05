@@ -29,33 +29,11 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if ( localStorage.getItem('tokenJWT') !== null ) {
-
-      // Se llama a la consulta de meData
-      this.auth.getMe().subscribe( (result: MeData) => {
-
-        // Obtener suscripto los datos de consulta
-        if ( result.status ) { // De tener un token no caducado y válido
-
-          this.auth.updateStateSession(true);
-
-        } else {
-
-          this.auth.updateStateSession(false);
-
-        }
-
-      });
-
-    } else {
-      this.auth.updateStateSession(false);
-    }
+    this.auth.start();
 
   }
 
   save(): void {
-
-    console.log(this.register);
 
     this.api.register( this.register ).subscribe( ({data}) => {
 

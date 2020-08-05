@@ -38,52 +38,13 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // Tenemos token (para ver si habilitar o no oopciones del navbar)
-    if ( localStorage.getItem('tokenJWT') !== null ) {
-
-
-      // Se llama a la consulta de meData
-      this.auth.getMe().subscribe( (result: MeData) => {
-
-        if ( result.status ) {
-
-          this.access = true;
-
-        } else {
-
-          this.access = false;
-
-        }
-
-
-        console.log('getme', this.access);
-
-      } );
-
-
-    } else { // De no haber token
-
-      this.access = false;
-      console.log('not getme', this.access);
-
-    }
+    this.auth.start();
 
   }
 
   logout(): void {
 
-    this.auth.updateStateSession(false);
-    localStorage.removeItem('tokenJWT');
-
-    const currentRouter = this.router.url; // Obtener la ruta actual
-
-    // En caso de no estar logueado y no se esta ni en registar ni en users al desloguearse, ir al login
-    if ( currentRouter !== '/register' && currentRouter !== '/users' ) {
-
-      this.router.navigate(['/login']);
-
-    }
-
+    this.auth.logout();
 
   }
 

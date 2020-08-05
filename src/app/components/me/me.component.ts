@@ -13,47 +13,30 @@ export class MeComponent implements OnInit {
 
   user: any;
 
-  constructor( private auth: AuthService, private router: Router ) { }
+  constructor(  private auth: AuthService,
+                private router: Router ) {
+
+    this.auth.userVar$.subscribe( (data: MeData) => {
+
+      // De ser no nulo ni indefinido es porqque tiene una sesisión iniciada
+      if ( data !==  null && data !== undefined ) {
+
+        this.user = data.user;
+
+      }
+
+    });
+
+  }
 
   ngOnInit(): void {
 
-    // Tenemos token
-    if ( localStorage.getItem('tokenJWT') !== null ) {
-
-
-      // Se llama a la consulta de meData
-      this.auth.getMe().subscribe( (result: MeData) => {
-
-        // Obtener suscripto los datos de consulta
-        if ( result.status ) { // De tener un token no caducado y válido
-
-          console.log(result.user);
-          this.user = result.user;
-
-        } else {
-
-          console.log('Token no válido');
-          localStorage.removeItem('tokenJWT'); // Sacarlo de no ser válido (Cuando caduca por ejemplo)
-          this.logout();
-
-        }
-
-      } );
-
-
-    } else { // De no haber token
-
-      this.logout();
-
-    }
-
+    this.auth.start();
   }
 
   logout(): void {
 
-    this.auth.updateStateSession(false);
-    localStorage.removeItem('tokenJWT');
-    this.router.navigate(['/login']);
+    this.auth.logout();
 
   }
 
