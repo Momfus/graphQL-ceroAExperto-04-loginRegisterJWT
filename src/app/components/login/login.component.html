@@ -1,61 +1,91 @@
-<h2>Formulario de inicio de sesión</h2>
 
-<form (ngSubmit)="save()" #forma="ngForm">
 
-  <div class="form-group">
-    <label for="email">Email address</label>
-    <input  name="email"
-            #email="ngModel"
-            [(ngModel)]="user.email"
-            type="email"
-            class="form-control"
-            id="email"
-            aria-describedby="emailHelp"
-            placeholder="Enter email"
-            [ngClass]="{ 'is-valid': !email.invalid, 'is-invalid': email.invalid }"
-            required
-            pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+<!--  Clases para centrar el formulario -->
+<div class="row">
+  <div class="col-lg"></div>
 
-      <!-- Mensaje de errores según el tipo para mostrar debajo del campo -->
-      <div *ngIf="email.invalid && (email.dirty || email.touched)"
-            class="alert alert-danger">
+  <!-- Formulario -->
+  <div class="col-lg-4">
 
-            <div *ngIf="email.errors.required">
-              Email necesario
-            </div>
 
-            <div *ngIf="email.errors && email.errors.pattern">
-              Email incorrecto
-            </div>
+    <!-- Advertir si los credenciles son correctos -->
+    <div  *ngIf="error"
+          class="alert alert-warning"
+          role="alert">
+
+      Los credenciales introducidos no son los correctos
+
+    </div>
+
+    <h2>Formulario de inicio de sesión</h2>
+
+    <form (ngSubmit)="save()" #forma="ngForm">
+
+      <!-- email-->
+      <div class="form-group">
+
+        <label for="email">Email address</label>
+        <input  name="email"
+                #email="ngModel"
+                [(ngModel)]="user.email"
+                type="email"
+                class="form-control"
+                id="email"
+                aria-describedby="emailHelp"
+                placeholder="Enter email"
+                [ngClass]="{ 'is-valid': !email.invalid, 'is-invalid': ( email.invalid && email.touched )}"
+                required
+                pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+
+          <!-- Mensaje de errores según el tipo para mostrar debajo del campo -->
+          <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                class="alert alert-danger">
+
+                <div *ngIf="email.errors.required">
+                  Email necesario
+                </div>
+
+                <div *ngIf="email.errors && email.errors.pattern">
+                  Email incorrecto
+                </div>
+
+          </div>
 
       </div>
 
-  </div>
+      <!-- Password -->
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input  name="password"
+                #password="ngModel"
+                [(ngModel)]="user.password"
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Enter password"
+                required
+                [ngClass]="{ 'is-valid': !password.invalid, 'is-invalid': (password.invalid && password.touched )}"
+                >
 
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input  name="password"
-            #password="ngModel"
-            [(ngModel)]="user.password"
-            type="password"
-            class="form-control"
-            id="password"
-            required
-            [ngClass]="{ 'is-valid': !password.invalid, 'is-invalid': password.invalid }"
-            >
+          <!-- Mensaje de errores según el tipo para mostrar debajo del campo -->
+          <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                class="alert alert-danger">
 
-      <!-- Mensaje de errores según el tipo para mostrar debajo del campo -->
-      <div *ngIf="password.invalid && (password.dirty || password.touched)"
-            class="alert alert-danger">
+            <div *ngIf="password.errors.required">
+              Password necesario
+            </div>
 
-        <div *ngIf="password.errors.required">
-          Password necesario
-        </div>
-
+          </div>
       </div>
+
+
+      <!-- Action buttons -->
+      <button [disabled]="!forma.valid" type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
   </div>
 
+  <div class="col-lg"></div>
+</div>
 
-  <button [disabled]="!forma.valid" type="submit" class="btn btn-primary">Submit</button>
-
-</form>

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
+import { LoginData, LoginResult } from './login.interface';
+import { ApiService } from '../../services/api.service';
+
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,19 +11,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  user: any = {
+  user: LoginData = {
     email: '',
     password: ''
   };
 
-  constructor() { }
+  error: boolean;
+
+  constructor( private api: ApiService ) { }
 
   ngOnInit(): void {
   }
 
   save(): void {
 
-    console.log( this.user );
+    // Ingresar con lo ingresado por el usuario
+    this.api.login( this.user.email, this.user.password )
+        .subscribe( (result: LoginResult) => {
+
+          console.log(result);
+
+          if ( result.status ) {
+
+            this.error = false;
+            localStorage.setItem('tokenJWT', result.token);
+            console.log('Login correcto');
+
+          } else {
+
+            this.error = true;
+            localStorage.removeItem('tokenJWT');
+            console.log('Login incorrecto');
+
+          }
+
+        } );
 
   }
 
