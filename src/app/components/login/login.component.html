@@ -5,8 +5,7 @@
   <div class="col-lg"></div>
 
   <!-- Formulario -->
-  <div class="col-lg-4">
-
+  <div class="col-lg-4" id="form">
 
     <!-- Advertir si los credenciles son correctos -->
     <div  *ngIf="error"
@@ -17,7 +16,7 @@
 
     </div>
 
-    <h2>Formulario de inicio de sesión</h2>
+    <h2 id="form-title">Inicio de sesión</h2>
 
     <form (ngSubmit)="save()" #forma="ngForm">
 
