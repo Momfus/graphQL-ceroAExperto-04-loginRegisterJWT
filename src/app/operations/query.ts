@@ -1,6 +1,5 @@
 import gql from 'graphql-tag';
 
-
 // obtener la data del usuario
 export const meData = gql`
 

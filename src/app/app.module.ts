@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MeComponent } from './components/me/me.component';
 import { UsersComponent } from './components/users/users.component';
 import { NavbarComponent } from './components/shared/navbar/navbar.component';
+import { RegisterComponent } from './components/register/register.component';
 
 
 
@@ -21,7 +22,8 @@ import { NavbarComponent } from './components/shared/navbar/navbar.component';
     LoginComponent,
     MeComponent,
     UsersComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

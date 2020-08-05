@@ -21,7 +21,6 @@ export class UsersComponent implements OnInit {
     // Para saber el estado de la sesión y controlar el estado del menu
     if ( localStorage.getItem('tokenJWT') !== null ) {
 
-
       // Se llama a la consulta de meData
       this.auth.getMe().subscribe( (result: MeData) => {
 

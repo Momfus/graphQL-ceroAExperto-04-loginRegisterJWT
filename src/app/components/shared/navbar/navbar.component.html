@@ -25,6 +25,11 @@
         <a class="nav-link" [routerLink]="['users']">Users</a>
       </li>
 
+      <li *ngIf="!access"
+          class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['register']">Register</a>
+      </li>
+
     </ul>
 
     <!-- Action buttons -->

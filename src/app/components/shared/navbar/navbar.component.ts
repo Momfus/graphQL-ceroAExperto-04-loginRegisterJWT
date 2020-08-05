@@ -73,9 +73,17 @@ export class NavbarComponent implements OnInit {
   logout(): void {
 
     this.auth.updateStateSession(false);
-
     localStorage.removeItem('tokenJWT');
-    this.router.navigate(['/login']);
+
+    const currentRouter = this.router.url; // Obtener la ruta actual
+
+    // En caso de no estar logueado y no se esta ni en registar ni en users al desloguearse, ir al login
+    if ( currentRouter !== '/register' && currentRouter !== '/users' ) {
+
+      this.router.navigate(['/login']);
+
+    }
+
 
   }
 

@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { getUsers, login } from '../operations/query';
+import { registerData } from '../operations/mutation';
+
 import { Apollo } from 'apollo-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { RegisterData } from '../components/register/register.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -47,6 +50,19 @@ export class ApiService {
       return result.data.login; // Users como se aclaro arriba
 
     }));
+
+  }
+
+  // Para registrar / añadir un nuevo usuario
+  register( user: RegisterData ): Observable<any> {
+
+    return this.apollo
+            .mutate({
+              mutation: registerData,
+              variables: {
+                user
+              }
+            });
 
   }
 
