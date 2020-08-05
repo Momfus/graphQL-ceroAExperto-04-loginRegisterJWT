@@ -34,7 +34,7 @@ export class MeComponent implements OnInit {
 
           console.log('Token no válido');
           localStorage.removeItem('tokenJWT'); // Sacarlo de no ser válido (Cuando caduca por ejemplo)
-          this.router.navigate(['/login']);
+          this.logout();
 
         }
 
@@ -43,9 +43,16 @@ export class MeComponent implements OnInit {
 
     } else { // De no haber token
 
-      this.router.navigate(['/login']);
+      this.logout();
 
     }
+
+  }
+
+  logout(): void {
+
+    localStorage.removeItem('tokenJWT');
+    this.router.navigate(['/login']);
 
   }
 
