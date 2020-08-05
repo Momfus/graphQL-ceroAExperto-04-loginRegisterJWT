@@ -4,6 +4,7 @@ import { LoginData, LoginResult } from './login.interface';
 import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { MeData } from '../me/me-interface';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -21,7 +22,9 @@ export class LoginComponent implements OnInit {
   error: boolean;
   show: boolean;
 
-  constructor( private api: ApiService, private router: Router ) { }
+  constructor(  private api: ApiService,
+                private auth: AuthService,
+                private router: Router ) { }
 
   ngOnInit(): void {
 
@@ -31,7 +34,7 @@ export class LoginComponent implements OnInit {
 
 
       // Se llama a la consulta de meData
-      this.api.getMe().subscribe( (result: MeData) => {
+      this.auth.getMe().subscribe( (result: MeData) => {
 
         // Obtener suscripto los datos de consulta
         if ( result.status ) { // De tener un token no caducado y válido
@@ -58,11 +61,17 @@ export class LoginComponent implements OnInit {
 
             this.error = false;
             localStorage.setItem('tokenJWT', result.token);
+
+            this.auth.updateStateSession(true);
+
             this.router.navigate(['/me']);
 
           } else {
 
             this.error = true;
+
+            this.auth.updateStateSession(false);
+
             localStorage.removeItem('tokenJWT');
           }
 

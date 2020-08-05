@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { getUsers, login, meData } from '../operations/query';
+import { getUsers, login } from '../operations/query';
 import { Apollo } from 'apollo-angular';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -51,29 +50,5 @@ export class ApiService {
 
   }
 
-  // Nuestra info con el token
-  getMe(): Observable<any> {
-
-    return this.apollo // Ejemplo particular (luego se hará parametrizada)
-    .watchQuery(
-      {
-        query: meData,
-        fetchPolicy: 'network-only',
-        context: {
-
-          headers: new HttpHeaders({
-            authorization: localStorage.getItem('tokenJWT')
-          })
-
-        }
-      }
-    ).valueChanges.pipe( map( (result: any) => {
-
-      // se obtiene el valor de la consulta
-      return result.data.me; // Users como se aclaro arriba
-
-    }));
-
-  }
 
 }

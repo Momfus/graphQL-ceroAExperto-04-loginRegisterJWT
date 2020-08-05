@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { Router } from '@angular/router';
 import { MeData } from './me-interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-me',
@@ -13,7 +13,7 @@ export class MeComponent implements OnInit {
 
   user: any;
 
-  constructor( private api: ApiService, private router: Router ) { }
+  constructor( private auth: AuthService, private router: Router ) { }
 
   ngOnInit(): void {
 
@@ -22,7 +22,7 @@ export class MeComponent implements OnInit {
 
 
       // Se llama a la consulta de meData
-      this.api.getMe().subscribe( (result: MeData) => {
+      this.auth.getMe().subscribe( (result: MeData) => {
 
         // Obtener suscripto los datos de consulta
         if ( result.status ) { // De tener un token no caducado y válido
@@ -51,6 +51,7 @@ export class MeComponent implements OnInit {
 
   logout(): void {
 
+    this.auth.updateStateSession(false);
     localStorage.removeItem('tokenJWT');
     this.router.navigate(['/login']);
 
