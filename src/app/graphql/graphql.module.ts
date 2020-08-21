@@ -25,7 +25,7 @@ export class GraphqlModule {
   constructor( apollo: Apollo, httpLink: HttpLink ) {
 
     apollo.create({
-      link: httpLink.create({ uri: 'http://localhost:5002/graphql'}),
+      link: httpLink.create({ uri: 'https://sistema-jwt-momfus.herokuapp.com/graphql'}),
       cache: new InMemoryCache()
     })
 
